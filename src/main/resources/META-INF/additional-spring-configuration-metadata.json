@@ -1,0 +1,32 @@
+{"properties": [
+  {
+    "name": "jwt.secret",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.secret'"
+  },
+  {
+    "name": "jwt.expiracion",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.expiracion'"
+  },
+  {
+    "name": "minio.url",
+    "type": "java.lang.String",
+    "description": "A description for 'minio.url'"
+  },
+  {
+    "name": "minio.access-key",
+    "type": "java.lang.String",
+    "description": "A description for 'minio.access-key'"
+  },
+  {
+    "name": "minio.secret-key",
+    "type": "java.lang.String",
+    "description": "A description for 'minio.secret-key'"
+  },
+  {
+    "name": "minio.bucket",
+    "type": "java.lang.String",
+    "description": "A description for 'minio.bucket'"
+  }
+]}
