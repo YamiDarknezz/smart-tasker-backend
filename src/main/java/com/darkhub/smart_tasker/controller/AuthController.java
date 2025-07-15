@@ -15,12 +15,12 @@ public class AuthController {
     @PostMapping("/register")
     public JSendResponse<AuthResponse> register(@RequestBody RegisterRequest request) {
         String token = userService.register(request.getName(), request.getEmail(), request.getPassword());
-        return new JSendResponse<>("success", new AuthResponse(token));
+        return JSendResponse.success(new AuthResponse(token));
     }
 
     @PostMapping("/login")
     public JSendResponse<AuthResponse> login(@RequestBody LoginRequest request) {
         String token = userService.login(request.getEmail(), request.getPassword());
-        return new JSendResponse<>("success", new AuthResponse(token));
+        return JSendResponse.success(new AuthResponse(token));
     }
 }
