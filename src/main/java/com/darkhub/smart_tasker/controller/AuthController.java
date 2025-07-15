@@ -13,14 +13,14 @@ public class AuthController {
     private UserService userService;
 
     @PostMapping("/register")
-    public AuthResponse register(@RequestBody RegisterRequest request) throws Exception {
+    public JSendResponse<AuthResponse> register(@RequestBody RegisterRequest request) {
         String token = userService.register(request.getName(), request.getEmail(), request.getPassword());
-        return new AuthResponse(token);
+        return new JSendResponse<>("success", new AuthResponse(token));
     }
 
     @PostMapping("/login")
-    public AuthResponse login(@RequestBody LoginRequest request) throws Exception {
+    public JSendResponse<AuthResponse> login(@RequestBody LoginRequest request) {
         String token = userService.login(request.getEmail(), request.getPassword());
-        return new AuthResponse(token);
+        return new JSendResponse<>("success", new AuthResponse(token));
     }
 }

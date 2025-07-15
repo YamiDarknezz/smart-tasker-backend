@@ -1,6 +1,7 @@
 package com.darkhub.smart_tasker.service;
 
 import com.darkhub.smart_tasker.entity.User;
+import com.darkhub.smart_tasker.exception.ExceptionFactory;
 import com.darkhub.smart_tasker.repository.UserRepository;
 import com.darkhub.smart_tasker.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,9 @@ public class UserService {
     @Autowired
     private JwtUtil jwtUtil;
 
-    public String register(String name, String email, String password) throws Exception {
+    public String register(String name, String email, String password) {
         if (userRepository.findByEmail(email) != null) {
-            throw new Exception("Email already registered");
+            throw ExceptionFactory.emailAlreadyRegistered(email);
         }
 
         User newUser = User.builder()
@@ -36,18 +37,13 @@ public class UserService {
 
         userRepository.save(newUser);
 
-        // Devolvemos un token para que el usuario quede logueado al registrarse
         return jwtUtil.generateToken(email);
     }
 
-    public String login(String email, String password) throws Exception {
+    public String login(String email, String password) {
         User user = userRepository.findByEmail(email);
-        if (user == null) {
-            throw new Exception("Invalid email or password");
-        }
-
-        if (!passwordEncoder.matches(password, user.getPasswordHash())) {
-            throw new Exception("Invalid email or password");
+        if (user == null || !passwordEncoder.matches(password, user.getPasswordHash())) {
+            throw ExceptionFactory.invalidCredentials();
         }
 
         return jwtUtil.generateToken(email);
