@@ -20,7 +20,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public JSendResponse<AuthResponse> login(@RequestBody LoginRequest request) {
-        String token = userService.login(request.getEmail(), request.getPassword());
-        return JSendResponse.success(new AuthResponse(token));
+        AuthResponse authResponse = userService.login(request.getEmail(), request.getPassword());
+        return JSendResponse.success(authResponse);
     }
 }

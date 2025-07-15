@@ -1,5 +1,6 @@
 package com.darkhub.smart_tasker.service;
 
+import com.darkhub.smart_tasker.dto.AuthResponse;
 import com.darkhub.smart_tasker.entity.User;
 import com.darkhub.smart_tasker.exception.ExceptionFactory;
 import com.darkhub.smart_tasker.repository.UserRepository;
@@ -38,13 +39,15 @@ public class UserService {
         userRepository.save(newUser);
     }
 
-    public String login(String email, String password) {
+    public AuthResponse login(String email, String password) {
         User user = userRepository.findByEmail(email);
         if (user == null || !passwordEncoder.matches(password, user.getPasswordHash())) {
             throw ExceptionFactory.invalidCredentials();
         }
 
-        return jwtUtil.generateToken(email);
+        String token = jwtUtil.generateToken(email);
+
+        return new AuthResponse(token, user.getEmail(), user.getName());
     }
 
     public Optional<User> getUserByEmail(String email) {
