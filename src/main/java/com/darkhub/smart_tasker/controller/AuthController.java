@@ -13,9 +13,9 @@ public class AuthController {
     private UserService userService;
 
     @PostMapping("/register")
-    public JSendResponse<AuthResponse> register(@RequestBody RegisterRequest request) {
-        String token = userService.register(request.getName(), request.getEmail(), request.getPassword());
-        return JSendResponse.success(new AuthResponse(token));
+    public JSendResponse<String> register(@RequestBody RegisterRequest request) {
+        userService.register(request.getName(), request.getEmail(), request.getPassword());
+        return JSendResponse.success("Registro exitoso");
     }
 
     @PostMapping("/login")

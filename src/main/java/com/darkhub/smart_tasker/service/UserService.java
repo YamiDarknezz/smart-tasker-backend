@@ -23,7 +23,7 @@ public class UserService {
     @Autowired
     private JwtUtil jwtUtil;
 
-    public String register(String name, String email, String password) {
+    public void register(String name, String email, String password) {
         if (userRepository.findByEmail(email) != null) {
             throw ExceptionFactory.emailAlreadyRegistered(email);
         }
@@ -36,8 +36,6 @@ public class UserService {
                 .build();
 
         userRepository.save(newUser);
-
-        return jwtUtil.generateToken(email);
     }
 
     public String login(String email, String password) {
