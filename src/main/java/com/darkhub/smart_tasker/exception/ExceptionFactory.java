@@ -31,4 +31,8 @@ public class ExceptionFactory {
     public static ApiException internalError(String detail) {
         return new ApiException("Internal server error: " + detail, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    public static ApiException invalidField(String message) {
+        return new ApiException(message, HttpStatus.BAD_REQUEST);
+    }    
 }

@@ -25,6 +25,14 @@ public class UserService {
     private JwtUtil jwtUtil;
 
     public void register(String name, String email, String password) {
+        if (name == null || name.trim().isEmpty()) {
+            throw ExceptionFactory.invalidField("Name cannot be empty");
+        }
+
+        if (password == null || password.length() < 8) {
+            throw ExceptionFactory.invalidField("Password must be at least 8 characters");
+        }
+
         if (userRepository.findByEmail(email) != null) {
             throw ExceptionFactory.emailAlreadyRegistered(email);
         }
