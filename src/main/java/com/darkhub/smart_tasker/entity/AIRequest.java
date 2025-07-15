@@ -5,16 +5,14 @@ import lombok.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import com.darkhub.smart_tasker.entity.enums.RequestType;
+
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class AIRequest {
-
-    public enum RequestType {
-        SUGGEST_SUBTASKS, SUMMARIZE
-    }
 
     @Id
     @GeneratedValue

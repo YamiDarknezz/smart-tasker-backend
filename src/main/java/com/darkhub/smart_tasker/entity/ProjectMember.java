@@ -4,16 +4,14 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
 
+import com.darkhub.smart_tasker.entity.enums.MemberRole;
+
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class ProjectMember {
-
-    public enum MemberRole {
-        ADMIN, EDITOR, VIEWER, INVITED
-    }
 
     @Id
     @GeneratedValue

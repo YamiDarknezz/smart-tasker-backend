@@ -6,20 +6,15 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import com.darkhub.smart_tasker.entity.enums.ProjectType;
+import com.darkhub.smart_tasker.entity.enums.ProjectStatus;
+
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class Project {
-
-    public enum ProjectType {
-        CURSO, TRABAJO, PERSONAL
-    }
-
-    public enum ProjectStatus {
-        ACTIVE, FINISHED
-    }
 
     @Id
     @GeneratedValue

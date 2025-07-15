@@ -6,20 +6,15 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+import com.darkhub.smart_tasker.entity.enums.Priority;
+import com.darkhub.smart_tasker.entity.enums.Status;
+
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class Task {
-
-    public enum Priority {
-        LOW, MEDIUM, HIGH
-    }
-
-    public enum Status {
-        TODO, DOING, DONE
-    }
 
     @Id
     @GeneratedValue
