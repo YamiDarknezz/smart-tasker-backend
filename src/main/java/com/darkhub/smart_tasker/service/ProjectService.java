@@ -63,13 +63,13 @@ public class ProjectService {
 
     public ProjectResponse getProjectById(UUID id, String userEmail) {
         Project project = findByIdOrThrow(id);
-        checkAccess(project, userEmail);
+        checkIsMember(project, userEmail);
         return toResponse(project);
     }
 
     public ProjectResponse updateProject(UUID id, ProjectRequest request, String userEmail) {
         Project project = findByIdOrThrow(id);
-        checkAccess(project, userEmail);
+        checkIsMember(project, userEmail);
 
         project.setName(request.getName());
         project.setDescription(request.getDescription());
@@ -105,8 +105,9 @@ public class ProjectService {
                 .orElseThrow(() -> ExceptionFactory.projectNotFound(id));
     }
 
-    private void checkAccess(Project project, String email) {
-        if (!project.getCreatedBy().getEmail().equals(email)) {
+    private void checkIsMember(Project project, String email) {
+        boolean isMember = memberRepository.existsByProjectAndUserEmail(project, email);
+        if (!isMember) {
             throw ExceptionFactory.forbidden("You are not a member of this project");
         }
     }
