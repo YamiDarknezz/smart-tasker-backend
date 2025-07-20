@@ -26,8 +26,8 @@ public class ExceptionFactory {
         return new ApiException("Project with ID " + id + " not found.", HttpStatus.NOT_FOUND);
     }
 
-    public static ApiException taskNotFound(String id) {
-        return new ApiException("Task with ID " + id + " not found.", HttpStatus.NOT_FOUND);
+    public static ApiException taskNotFound(UUID id) {
+        return new ApiException("Task not found with ID: " + id, HttpStatus.NOT_FOUND);
     }
 
     public static ApiException internalError(String detail) {
@@ -38,8 +38,8 @@ public class ExceptionFactory {
         return new ApiException(message, HttpStatus.BAD_REQUEST);
     }    
 
-    public static RuntimeException projectNotFound(UUID id) {
-        return new RuntimeException("Project not found with ID: " + id);
+    public static ApiException projectNotFound(UUID id) {
+        return new ApiException("Project not found with ID: " + id, HttpStatus.NOT_FOUND);
     }
 
     public static RuntimeException forbidden(String message) {
