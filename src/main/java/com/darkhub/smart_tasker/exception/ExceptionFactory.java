@@ -45,4 +45,12 @@ public class ExceptionFactory {
     public static RuntimeException forbidden(String message) {
         return new RuntimeException("Access denied: " + message);
     }
+
+    public static RuntimeException notFound(String message) {
+        return new RuntimeException("Not found: " + message);
+    }
+
+    public static RuntimeException conflict(String message) {
+        return new RuntimeException("Conflict: " + message);
+    }
 }
