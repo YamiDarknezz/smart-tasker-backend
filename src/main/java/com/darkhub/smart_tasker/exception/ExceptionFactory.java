@@ -1,5 +1,7 @@
 package com.darkhub.smart_tasker.exception;
 
+import java.util.UUID;
+
 import org.springframework.http.HttpStatus;
 
 public class ExceptionFactory {
@@ -35,4 +37,12 @@ public class ExceptionFactory {
     public static ApiException invalidField(String message) {
         return new ApiException(message, HttpStatus.BAD_REQUEST);
     }    
+
+    public static RuntimeException projectNotFound(UUID id) {
+        return new RuntimeException("Project not found with ID: " + id);
+    }
+
+    public static RuntimeException forbidden(String message) {
+        return new RuntimeException("Access denied: " + message);
+    }
 }

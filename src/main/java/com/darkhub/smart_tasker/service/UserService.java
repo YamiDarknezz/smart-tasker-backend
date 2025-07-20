@@ -48,17 +48,18 @@ public class UserService {
     }
 
     public AuthResponse login(String email, String password) {
-        User user = userRepository.findByEmail(email);
-        if (user == null || !passwordEncoder.matches(password, user.getPasswordHash())) {
+        User user = userRepository.findByEmail(email)
+            .orElseThrow(ExceptionFactory::invalidCredentials);
+
+        if (!passwordEncoder.matches(password, user.getPasswordHash())) {
             throw ExceptionFactory.invalidCredentials();
         }
 
         String token = jwtUtil.generateToken(email);
-
         return new AuthResponse(token, user.getEmail(), user.getName());
     }
 
     public Optional<User> getUserByEmail(String email) {
-        return Optional.ofNullable(userRepository.findByEmail(email));
+        return userRepository.findByEmail(email);
     }
 }
